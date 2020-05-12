@@ -14,7 +14,7 @@
   <div class="container-fluid">
     <div class="jumbotron text-center" style="background-image: url('https://wallpaperaccess.com/full/538127.jpg'); background-size: cover;">
       <h1 class="text-white">Mission to Mars!</h1>
-      <p class=' andale_font'><a class="btn bg-light btn-lg text-dark" href="/scrape_mars.py" role="button">Get Data!</a></p>
+      <p class=' andale_font'><a class="btn bg-light btn-lg text-dark" href="/scrape" role="button">Get Data!</a></p>
     </div>
     <!-- mars is the name of db from /scrape that will be returned -->
     
@@ -33,7 +33,7 @@
       <div class="col-lg-7 col-sm-12">
         <h5 class='andale_font'>Featured Image</h5>
         <div class='card '>
-          <img :hover class= 'card-img-top' src="{{ item.featuredimage }}" alt="Featured Image">
+          <img :hover class= 'card-img-top' src="{{item.featuredimage}}" alt="Featured Image">
         </div>  
       </div>
       <br>
@@ -48,7 +48,7 @@
         <div class='card'>
           <div class="card-body">
             <h3 class='andale_font'>Mars Facts</h3>
-            {{item.factstable}}
+            {{item.factstable | safe}}
           </div>
         </div>
       </div>
@@ -59,23 +59,60 @@
     <div class="row">
       <div class="col-lg-12 col-sm-12">
         <h3 class='text-center'>Mars Hemispheres</h3>
-        
-        {% for hemisphere in hemispheres_image_urls %}
           
           <div class='card-deck justify-content-md-center'>
             <div class="col-lg-5 col-sm-8">
               <div class='card'>
                 <a href="https://astrogeology.usgs.gov/search/results?q=hemisphere+enhanced&k1=target&v1=Mars">
-                <img class= 'card-img-top' src="{{hemispheres_image_urls.img_url}}"  alt="Hemisphere 1/4">
+                <img class= 'card-img-top' src="{{ item.ce_img_url }}"  alt="Hemisphere 1/4">
                 </a>
                 <div class="card-body">
-                  <h5 class="card-title">{{hemispheres_image_urls.title}}</h5>
+                  <h5 class="card-title">{{item.ce_title}}</h5>
                 </div>
               </div>
             </div>
           </div>
-        
-        {% endfor %}
+
+
+          <div class='card-deck justify-content-md-center'>
+            <div class="col-lg-5 col-sm-8">
+              <div class='card'>
+                <a href="https://astrogeology.usgs.gov/search/results?q=hemisphere+enhanced&k1=target&v1=Mars">
+                <img class= 'card-img-top' src="{{ item.sc_img_url }}"  alt="Hemisphere 2/4">
+                </a>
+                <div class="card-body">
+                  <h5 class="card-title">{{item.sc_title}}</h5>
+                </div>
+              </div>
+            </div>
+          </div>
+
+
+          <div class='card-deck justify-content-md-center'>
+            <div class="col-lg-5 col-sm-8">
+              <div class='card'>
+                <a href="https://astrogeology.usgs.gov/search/results?q=hemisphere+enhanced&k1=target&v1=Mars">
+                <img class= 'card-img-top' src="{{ item.sy_img_url }}"  alt="Hemisphere 3/4">
+                </a>
+                <div class="card-body">
+                  <h5 class="card-title">{{item.sy_title}}</h5>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class='card-deck justify-content-md-center'>
+            <div class="col-lg-5 col-sm-8">
+              <div class='card'>
+                <a href="https://astrogeology.usgs.gov/search/results?q=hemisphere+enhanced&k1=target&v1=Mars">
+                <img class= 'card-img-top' src="{{ item.va_img_url }}"  alt="Hemisphere 4/4">
+                </a>
+                <div class="card-body">
+                  <h5 class="card-title">{{item.va_title}}</h5>
+                </div>
+              </div>
+            </div>
+          </div>
           
       </div>
     </div>

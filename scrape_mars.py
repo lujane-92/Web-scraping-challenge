@@ -117,31 +117,56 @@ def scrape():
     facts_html
 
     # ## Mars Hemispheres
-
+    
+    #cerberus
     time.sleep(3)
+   
+    url = 'https://astrogeology.usgs.gov/search/map/Mars/Viking/cerberus_enhanced'
+    browser.visit(url)
+    html = browser.html
+    soup = BeautifulSoup(html, 'html.parser')
+    url = soup.find('div', class_='downloads')
+    link = url.find('a')
+    ce_href = link['href']
+    
+    #Schiaparelli 
+    time.sleep(3)
+    url = 'https://astrogeology.usgs.gov/search/map/Mars/Viking/Schiaparelli_enhanced'
+    browser.visit(url)
+    html = browser.html
+    soup = BeautifulSoup(html, 'html.parser')
+    url = soup.find('div', class_='downloads')
+    link = url.find('a')
+    sc_href = link['href']
 
-    hemispheres_url = "https://astrogeology.usgs.gov/search/results?q=hemisphere+enhanced&k1=target&v1=Mars"
-
-    browser.visit(hemispheres_url)
-
-    hemlist = ["cerberus", "Schiaparelli", "Syrtis Major","valles_marineris"]
-    href_list = []
-    for i in range(0,4):
-        url = 'https://astrogeology.usgs.gov/search/map/Mars/Viking/'+hemlist[i]+'_enhanced'
-        browser.visit(url)
-        html = browser.html
-        soup = BeautifulSoup(html, 'html.parser')
-        url = soup.find('div', class_='downloads')
-        link = url.find('a')
-        href = link['href']
-        href_list.append(href)
+    
+    #Syrtis Major   
+    time.sleep(3)
+    url = 'https://astrogeology.usgs.gov/search/map/Mars/Viking/Syrtis Major_enhanced'
+    browser.visit(url)
+    html = browser.html
+    soup = BeautifulSoup(html, 'html.parser')
+    url = soup.find('div', class_='downloads')
+    link = url.find('a')
+    sy_href = link['href']
+    
+    
+    #valles_marineris
+    time.sleep(3)
+    url = 'https://astrogeology.usgs.gov/search/map/Mars/Viking/valles_marineris_enhanced'
+    browser.visit(url)
+    html = browser.html
+    soup = BeautifulSoup(html, 'html.parser')
+    url = soup.find('div', class_='downloads')
+    link = url.find('a')
+    va_href = link['href']
 
    
     hemispheres_image_urls = [
-        {"title": "cerberus Hemisphere", "img_url": href_list[0]},
-        {"title": "Schiaparelli Hemisphere", "img_url": href_list[1]},
-        {"title": "Syrtis Major Hemisphere", "img_url": href_list[2]},
-        {"title": "valles_marineris Hemisphere", "img_url": href_list[3]}
+        {"title": "cerberus Hemisphere", "img_url": ce_href},
+        {"title": "Schiaparelli Hemisphere", "img_url": sc_href},
+        {"title": "Syrtis Major Hemisphere", "img_url": sy_href},
+        {"title": "valles_marineris Hemisphere", "img_url": va_href}
     ]
 
     mars_dict = {
@@ -150,10 +175,10 @@ def scrape():
         'featuredimage': full_image_url,
         'factstable': facts_html,
         'weather': tweet,
-        "va_title": "cerberus Hemisphere", "va_img_url": href_list[0],
-        "ce_title": "Schiaparelli Hemisphere", "ce_img_url": href_list[1],
-        "sc_title": "Syrtis Major Hemisphere", "sc_img_url": href_list[2],
-        "sy_title": "valles_marineris Hemisphere", "sy_img_url": href_list[3] 
+        "ce_title": "cerberus Hemisphere", "ce_img_url": ce_href,
+        "sc_title": "Schiaparelli Hemisphere", "sc_img_url": sc_href,
+        "sy_title": "Syrtis Major Hemisphere", "sy_img_url": sy_href,
+        "va_title": "valles_marineris Hemisphere", "va_img_url": va_href 
         }
 
     browser.quit()

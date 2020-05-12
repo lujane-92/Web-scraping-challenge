@@ -3,78 +3,87 @@
 
 <head>
   <meta charset="UTF-8">
-  <title>Mars</title>
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Mission to Mars</title>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+  <link rel="stylesheet" href="static/style.css">
 </head>
 
 <body>
-  <div class="container">
-
-    <div class="jumbotron text-center">
-      <h1>Mission To Mars</h1>
-      <p><a class="btn btn-primary btn-lg" href="/scrape" role="button">Scrape New Data</a></p>
+  <div class="container-fluid">
+    <div class="jumbotron text-center" style="background-image: url('https://wallpaperaccess.com/full/538127.jpg'); background-size: cover;">
+      <h1 class="text-white">Mission to Mars!</h1>
+      <p class=' andale_font'><a class="btn bg-light btn-lg text-dark" href="/scrape" role="button">Get Data!</a></p>
+    </div>
+    <!-- mars is the name of db from /scrape that will be returned -->
+    
+    <div class="row">
+      <div class="col-lg-12 col-sm-12">
+        <h3 class='andale_font'>Latest Mars News</h3>
+        <h4 class='andale_font'>{{ mars.news_title }} </h4>
+        <p class='andale_font'> {{ mars.summary }}</p>
+      </div>
     </div>
 
-
-
-    {% for item in mars_results %}
+    <hr>
+    
     <div class="row">
-      <div class="col-md-12">
-        <h2>Latest Mars News</h2>
-        <h5>{{item.latestheadline}}</h5>
-        <p>{{item.latestparagraph}}</p>
+      <div class="col-lg-7 col-sm-12">
+        <h5 class='andale_font'>Featured Image</h5>
+        <div class='card '>
+          <img :hover class= 'card-img-top' href='https://www.jpl.nasa.gov/spaceimages/' src="{{ mars.featured_image_url }}" alt="Featured Image">
+        </div>  
+      </div>
+      <br>
+      <div class='col-lg-5 col-sm-12'>
+        <div class='card'>
+          <div class="card-body">
+            <h3 class='card-title'>Current Weather on Mars</h3>
+            <p class='card-text'>{{mars.mars_weather}}</p>
+          </div>
+        </div>
+        <br>
+        <div class='card'>
+          <div class="card-body">
+            <h3 class='andale_font'>Mars Facts</h3>
+            {{mars.Mars_table|safe}}
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    <hr>
+
+    <div class="row">
+      <div class="col-lg-12 col-sm-12">
+        <h3 class='text-center'>Mars Hemispheres</h3>
         
+        {% for hemisphere in mars.Hemispheres %}
+          
+          <div class='card-deck justify-content-md-center'>
+            <div class="col-lg-5 col-sm-8">
+              <div class='card'>
+                <a href="https://astrogeology.usgs.gov/search/results?q=hemisphere+enhanced&k1=target&v1=Mars">
+                <img class= 'card-img-top' src="{{hemisphere.img_url}}"  alt="Hemisphere 1/4">
+                </a>
+                <div class="card-body">
+                  <h5 class="card-title">{{hemisphere.title}}</h5>
+                </div>
+              </div>
+            </div>
+          </div>
+        
+        {% endfor %}
+          
       </div>
     </div>
-    <div class="row">
-      <div class="col-md-7">
-        <h2>Featured Mars Image</h2>
-        <img src = {{item.featuredimage}} height=400px width=600 px>
-        <p></p>
-      </div>
-      <div class="col-md-5">
-        <div class="row">
-          <h3>Current Weather on Mars</h3>
-          <p>{{item.currentweather}}</p>
-        </div>
-        <div class="row">
-          <h3>Mars Facts</h3>
-          <p> {{item.factstable | safe}} </p>
-        </div>
-      </div>
-    </div>
-
-    <div class="row">
-      <div class="col-6">
-        <img src = {{item.va_img_url}} height=500px width=500px>
-        <p>Valles Marineris Hemisphere Enhanced</p>
-        <p></p>
-      </div>
-      <div class="col-6">
-        <img src = {{item.ce_img_url}} height=500px width=500px>
-        <p>Cerberus Hemisphere Enhanced</p>
-      </div>
-      <p></p>
-    </div>
-
-    <div class="row">
-      <div class="col-6">
-        <img src = {{item.sc_img_url}} height=500px width=500px>
-        <p>Schiaperelli Hemisphere Enhanced</p>
-        <p></p>
-      </div>
-      <div class="col-6">
-        <img src = {{item.sy_img_url}} height=500px width=500px>
-        <p>Syrtis Major Hemisphere Enhanced</p>
-        <p></p>
-      </div>
-    </div>
-
-
-
-    {% endfor %}
-
   </div>
+  
+  <script src="https://code.jquery.com/jquery-3.2.1.js" integrity="sha256-DZAnKJ/6XZ9si04Hgrsxu/8s717jcIzLy3oi35EouyE=" crossorigin="anonymous"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
+    crossorigin="anonymous">
+    </script>
 </body>
 
 </html>

@@ -14,15 +14,16 @@
   <div class="container-fluid">
     <div class="jumbotron text-center" style="background-image: url('https://wallpaperaccess.com/full/538127.jpg'); background-size: cover;">
       <h1 class="text-white">Mission to Mars!</h1>
-      <p class=' andale_font'><a class="btn bg-light btn-lg text-dark" href="/scrape" role="button">Get Data!</a></p>
+      <p class=' andale_font'><a class="btn bg-light btn-lg text-dark" href="/scrape_mars.py" role="button">Get Data!</a></p>
     </div>
     <!-- mars is the name of db from /scrape that will be returned -->
     
+    {% for item in mars_results %}
     <div class="row">
       <div class="col-lg-12 col-sm-12">
         <h3 class='andale_font'>Latest Mars News</h3>
-        <h4 class='andale_font'>{{ mars.news_title }} </h4>
-        <p class='andale_font'> {{ mars.summary }}</p>
+        <h4 class='andale_font'>{{ item.latestheadline }} </h4>
+        <p class='andale_font'> {{ item.latestparagraph }}</p>
       </div>
     </div>
 
@@ -32,7 +33,7 @@
       <div class="col-lg-7 col-sm-12">
         <h5 class='andale_font'>Featured Image</h5>
         <div class='card '>
-          <img :hover class= 'card-img-top' href='https://www.jpl.nasa.gov/spaceimages/' src="{{ mars.featured_image_url }}" alt="Featured Image">
+          <img :hover class= 'card-img-top' src="{{ item.featuredimage }}" alt="Featured Image">
         </div>  
       </div>
       <br>
@@ -40,14 +41,14 @@
         <div class='card'>
           <div class="card-body">
             <h3 class='card-title'>Current Weather on Mars</h3>
-            <p class='card-text'>{{mars.mars_weather}}</p>
+            <p class='card-text'>{{item.weather}}</p>
           </div>
         </div>
         <br>
         <div class='card'>
           <div class="card-body">
             <h3 class='andale_font'>Mars Facts</h3>
-            {{mars.Mars_table|safe}}
+            {{item.factstable}}
           </div>
         </div>
       </div>
@@ -59,16 +60,16 @@
       <div class="col-lg-12 col-sm-12">
         <h3 class='text-center'>Mars Hemispheres</h3>
         
-        {% for hemisphere in mars.Hemispheres %}
+        {% for hemisphere in hemispheres_image_urls %}
           
           <div class='card-deck justify-content-md-center'>
             <div class="col-lg-5 col-sm-8">
               <div class='card'>
                 <a href="https://astrogeology.usgs.gov/search/results?q=hemisphere+enhanced&k1=target&v1=Mars">
-                <img class= 'card-img-top' src="{{hemisphere.img_url}}"  alt="Hemisphere 1/4">
+                <img class= 'card-img-top' src="{{hemispheres_image_urls.img_url}}"  alt="Hemisphere 1/4">
                 </a>
                 <div class="card-body">
-                  <h5 class="card-title">{{hemisphere.title}}</h5>
+                  <h5 class="card-title">{{hemispheres_image_urls.title}}</h5>
                 </div>
               </div>
             </div>
@@ -84,6 +85,7 @@
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
     crossorigin="anonymous">
     </script>
+   {% endfor %}
 </body>
 
 </html>

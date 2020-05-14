@@ -74,25 +74,26 @@ def scrape():
 
     # ## Mars Weather
 
-    time.sleep(3)
+    
+    #time.sleep(3)
 
-    weather_url = "https://twitter.com/marswxreport?lang=en"
-    browser.visit(weather_url)
+    #weather_url = "https://twitter.com/marswxreport?lang=en"
+    #browser.visit(weather_url)
 
-    html = browser.html
-    mars_weather_soup = BeautifulSoup(html, 'html.parser')
+    #html = browser.html
+    #mars_weather_soup = BeautifulSoup(html, 'html.parser')
 
-    weather_tweet = soup.find_all('div', class_='css-1dbjc4n')
+    #weather_tweet = soup.find_all('div', class_='css-1dbjc4n')
     
-    weather_tweet[2].find('span')
+    #weather_tweet[2].find('span')
     
-    weather_tweet[0].find('section', class_='css-1dbjc4n')
+    #weather_tweet[0].find('section', class_='css-1dbjc4n')
     
-    tweet_braket=weather_tweet[0].find('div',class_='css-901oao r-hkyrab r-1qd0xha r-a023e6 r-16dba41 r-ad9z0x r-bcqeeo r-bnwqim r-qvutc0')
+    #tweet_braket=weather_tweet[0].find('div',class_='css-901oao r-hkyrab r-1qd0xha r-a023e6 r-16dba41 r-ad9z0x r-bcqeeo r-bnwqim r-qvutc0')
     
-    tweet_braket1=tweet_braket.find('span', class_='css-901oao css-16my406 r-1qd0xha r-ad9z0x r-bcqeeo r-qvutc0')
+    # tweet_braket1=tweet_braket.find('span', class_='css-901oao css-16my406 r-1qd0xha r-ad9z0x r-bcqeeo r-qvutc0')
     
-    tweet=tweet_braket1.getText()
+    # tweet=tweet_braket1.getText()
 
     # find the tweet text
 
@@ -174,7 +175,7 @@ def scrape():
         'latestparagraph':  paras,
         'featuredimage': full_image_url,
         'factstable': facts_html,
-        'weather': tweet,
+        'weather': "tweet",
         "ce_title": "cerberus Hemisphere", "ce_img_url": ce_href,
         "sc_title": "Schiaparelli Hemisphere", "sc_img_url": sc_href,
         "sy_title": "Syrtis Major Hemisphere", "sy_img_url": sy_href,
